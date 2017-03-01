@@ -15,7 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Game extends Canvas {
+	
 	private BufferStrategy strategy;
+	private boolean gameRunning;
 	public Game() {
 		JFrame container = new JFrame("Space Invaders Clone");
 		JPanel panel = (JPanel) container.getContentPane();
@@ -39,8 +41,25 @@ public class Game extends Canvas {
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 	}
+	public void gameLoop() {
+		long lastLoopTime = System.currentTimeMillis();
+		
+		while (gameRunning) {
+			long delta = System.currentTimeMillis() - lastLoopTime;
+			lastLoopTime = System.currentTimeMillis();
+					
+			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			g.setColor(Color.black);
+			g.fillRect(0,0,800,600);
 
+			g.dispose();
+			strategy.show();
+
+			try { Thread.sleep(10); } catch (Exception e) {}
+		}
+	}
 	public static void main(String argv[]) {
 		Game g =new Game();
+		g.gameLoop();
 	}
 }
