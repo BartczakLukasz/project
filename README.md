@@ -11,7 +11,7 @@ In this version i want to add powerful enemy(boss), shot upgrade, health points,
 
 You can move in left and right and the enemies go from left to right changing direction and moving down a bit.
 
-Controls 
+1.Controls 
 
 left - left arrow key
 
@@ -23,7 +23,7 @@ pause - Enter
 
 quit - esc
 
-Objects
+2.Objects
 
 player is an object of ShipEntity class player can move in two directions left and right shooting small blasts
 
@@ -31,7 +31,7 @@ enemies are objects of AlienEntity class they move from left to right and go bac
 
 boss is an object of BossEntity class it moves from left to right and right to left performing devastating attacks
 
-Working schedule
+3.Working schedule
 
 first and second week - work with tutorial
 
@@ -43,7 +43,7 @@ fifth week - create boss shots and add pause mechanics
 
 sixth week - create sprites and additional game mechanics (health,score)
 
-Used technologies
+4.Used technologies
 
 javax.swing.Jframe
 
@@ -61,7 +61,7 @@ java.awt.event.WindowAdapter
 
 java.awt.event.WindowEvent
 
-Requirements
+5.Requirements
 
 JDK 1.6
 
@@ -78,7 +78,7 @@ W mojej wersji zamierzam dodać potężnego przeciwnika (bossa), zmianę(ulepsze
 
 W grze można poruszać się w lewo i w prawo. Przeciwnicy po doleceniu do krawędzi ekranu zmieniają kierunek lotu i przybliżają się do dolnej granicy ekranu.
 
-Sterowanie
+1.Sterowanie
 lewo - strzałka w lewo
 
 prawo - strzałka w prawo
@@ -89,7 +89,7 @@ pauza - Enter
 
 wyjście - esc
 
-Obiekty
+2.Obiekty
 
 Gracz jest obiektem klasy ShipEntity i może poruszać w lewo i w prawo oraz strzelać słabymi pociskami
 
@@ -97,7 +97,7 @@ Wrogowie są obiektami klasy AlienEntity i poruszają sie z lewej do prawej, a n
 
 Boss jest obiektem klasy BossEntity porusza się tylko w lewo i prawo oddając potężne strzały
 
-Harmonogram pracy
+3.Harmonogram pracy
 
 1 i 2 tydzień - praca z tutorialem
 
@@ -109,7 +109,7 @@ Harmonogram pracy
 
 6 tydzień - stworzenie obrazków i pozostałych elementów gry(punktacja, punkty życia)
 
-Użyte technologie
+4.Użyte technologie
 
 javax.swing.Jframe
 
@@ -127,6 +127,6 @@ java.awt.event.WindowAdapter
 
 java.awt.event.WindowEvent
 
-Wymagania
+5.Wymagania
 
 JDK 1.6
