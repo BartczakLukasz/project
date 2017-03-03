@@ -13,15 +13,11 @@ You can move in left and right and the enemies go from left to right changing di
 
 ###1. Controls 
 
-left - left arrow key
-
-right - right arrow key
-
-shoot - SPACE
-
-pause - Enter
-
-quit - esc
+* left - left arrow key
+* right - right arrow key
+* shoot - SPACE
+* pause - Enter
+* quit - esc
 
 ###2. Objects
 
@@ -32,34 +28,22 @@ enemies are objects of AlienEntity class they move from left to right and go bac
 boss is an object of BossEntity class it moves from left to right and right to left performing devastating attacks
 
 ###3. Working schedule
-
-first and second week - work with tutorial
-
-third week - create enemy shots and backgroud
-
-fourth week - adding sounds to the game and create boss
-
-fifth week - create boss shots and add pause mechanics
-
-sixth week - create sprites and additional game mechanics (health,score)
+* first and second week - work with tutorial
+* third week - create enemy shots and backgroud
+* fourth week - adding sounds to the game and create boss
+* fifth week - create boss shots and add pause mechanics
+* sixth week - create sprites and additional game mechanics (health,score)
 
 ###4. Used technologies
 
-javax.swing.Jframe
-
-javax.swing.JPanel
-
-java.awt.Dimension
-
-java.awt.Graphics2D
-
-java.awt.event.KeyAdapter
-
-java.awt.event.KeyEvent
-
-java.awt.event.WindowAdapter
-
-java.awt.event.WindowEvent
+* javax.swing.Jframe
+* javax.swing.JPanel
+* java.awt.Dimension
+* java.awt.Graphics2D
+* java.awt.event.KeyAdapter
+* java.awt.event.KeyEvent
+* java.awt.event.WindowAdapter
+* java.awt.event.WindowEvent
 
 ###5. Requirements
 
@@ -79,15 +63,11 @@ W mojej wersji zamierzam dodać potężnego przeciwnika (bossa), zmianę(ulepsze
 W grze można poruszać się w lewo i w prawo. Przeciwnicy po doleceniu do krawędzi ekranu zmieniają kierunek lotu i przybliżają się do dolnej granicy ekranu.
 
 ###1. Sterowanie
-lewo - strzałka w lewo
-
-prawo - strzałka w prawo
-
-strzał - spacja
-
-pauza - Enter
-
-wyjście - esc
+* lewo - strzałka w lewo
+* prawo - strzałka w prawo
+* strzał - spacja
+* pauza - Enter
+* wyjście - esc
 
 ###2. Obiekty
 
@@ -99,33 +79,21 @@ Boss jest obiektem klasy BossEntity porusza się tylko w lewo i prawo oddając p
 
 ###3. Harmonogram pracy
 
-1 i 2 tydzień - praca z tutorialem
-
-3 tydzień - stworzenie tła i pocisków wroga
-
-4 tydzień - dodanie dźwięków i stworzenie bossa
-
-5 tydzień - stworzenie pocisków bossa i pauzę
-
-6 tydzień - stworzenie obrazków i pozostałych elementów gry(punktacja, punkty życia)
+* 1 i 2 tydzień - praca z tutorialem
+* 3 tydzień - stworzenie tła i pocisków wroga
+* 4 tydzień - dodanie dźwięków i stworzenie bossa
+* 5 tydzień - stworzenie pocisków bossa i pauzę
+* 6 tydzień - stworzenie obrazków i pozostałych elementów gry(punktacja, punkty życia)
 
 ###4. Użyte technologie
-
-javax.swing.Jframe
-
-javax.swing.JPanel
-
-java.awt.Dimension
-
-java.awt.Graphics2D
-
-java.awt.event.KeyAdapter
-
-java.awt.event.KeyEvent
-
-java.awt.event.WindowAdapter
-
-java.awt.event.WindowEvent
+* javax.swing.Jframe
+* javax.swing.JPanel
+* java.awt.Dimension
+* java.awt.Graphics2D
+* java.awt.event.KeyAdapter
+* java.awt.event.KeyEvent
+* java.awt.event.WindowAdapter
+* java.awt.event.WindowEvent
 
 ###5. Wymagania
 
