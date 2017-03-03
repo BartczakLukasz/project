@@ -26,25 +26,42 @@ player is an object of ShipEntity class player can move in two directions left a
 enemies are objects of AlienEntity class they move from left to right and go back taking little step down shooting small blasts
 
 boss is an object of BossEntity class it moves from left to right and right to left performing devastating attacks
+
 3. Working schedule
+
 first and second week - work with tutorial
+
 third week - create enemy shots and backgroud
+
 fourth week - adding sounds to the game and create boss
+
 fifth week - create boss shots and add pause mechanics
+
 sixth week - create sprites and additional game mechanics (health,score)
 
 4. Used technologies
+
 javax.swing.Jframe
+
 javax.swing.JPanel
+
 java.awt.Canvas
+
 java.awt.Color
+
 java.awt.Dimension
+
 java.awt.Graphics2D
+
 import java.awt.event.KeyAdapter
+
 java.awt.event.KeyEvent
+
 java.awt.event.WindowAdapter
+
 java.awt.event.WindowEvent
-java.awt.image.BufferStrategy
+
+java.awt.image.BufferStrategy/n
 java.util.ArrayList
 
 Jest to gra typu shoot’em up oryginalnie stworzona przez Tomohiro Nishikado w 1978 roku na maszynę arcade’ową. Jest to jedna z pierwszych gier tego gatunku. Gra polega na wyeliminowaniu wszystkich wrogów znajdujących się u góry ekranu. 
