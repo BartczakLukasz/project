@@ -23,7 +23,7 @@ pause - Enter
 
 quit - esc
 
-2.Objects
+2. Objects
 
 player is an object of ShipEntity class player can move in two directions left and right shooting small blasts
 
