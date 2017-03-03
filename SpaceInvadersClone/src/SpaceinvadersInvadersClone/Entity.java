@@ -18,7 +18,6 @@ public abstract class Entity {
 	}
 	
 	public void move(long delta) {
-		// update the location of the entity based on move speeds
 		x += (delta * dx) / 1000;
 		y += (delta * dy) / 1000;
 	}
@@ -29,20 +28,11 @@ public abstract class Entity {
 		this.dx = dx;
 	}
 
-	/**
-	 * Set the vertical speed of this entity
-	 * 
-	 * @param dx The vertical speed of this entity (pixels/sec)
-	 */
+
 	public void setVerticalMovement(double dy) {
 		this.dy = dy;
 	}
 	
-	/**
-	 * Get the horizontal speed of this entity
-	 * 
-	 * @return The horizontal speed of this entity (pixels/sec)
-	 */
 	public double getHorizontalMovement() {
 		return dx;
 	}
