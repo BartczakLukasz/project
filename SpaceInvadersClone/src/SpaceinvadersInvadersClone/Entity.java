@@ -3,7 +3,6 @@ package SpaceinvadersInvadersClone;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-
 public abstract class Entity {
 	protected double x;
 	protected double y;
@@ -12,23 +11,38 @@ public abstract class Entity {
 	protected double dy;
 	private Rectangle me = new Rectangle();
 	private Rectangle him = new Rectangle();
-	
 	public Entity(String ref,int x,int y) {
 		this.sprite = SpriteStore.get().getSprite(ref);
 		this.x = x;
 		this.y = y;
 	}
+	
 	public void move(long delta) {
+		// update the location of the entity based on move speeds
 		x += (delta * dx) / 1000;
 		y += (delta * dy) / 1000;
 	}
+	
+	
 	public void setHorizontalMovement(double dx) {
+		
 		this.dx = dx;
 	}
+
+	/**
+	 * Set the vertical speed of this entity
+	 * 
+	 * @param dx The vertical speed of this entity (pixels/sec)
+	 */
 	public void setVerticalMovement(double dy) {
 		this.dy = dy;
 	}
 	
+	/**
+	 * Get the horizontal speed of this entity
+	 * 
+	 * @return The horizontal speed of this entity (pixels/sec)
+	 */
 	public double getHorizontalMovement() {
 		return dx;
 	}
@@ -37,6 +51,7 @@ public abstract class Entity {
 		return dy;
 	}
 	
+
 	public void draw(Graphics g) {
 		sprite.draw(g,(int) x,(int) y);
 	}
@@ -58,6 +73,5 @@ public abstract class Entity {
 
 		return me.intersects(him);
 	}
-	
 	public abstract void collidedWith(Entity other);
 }
