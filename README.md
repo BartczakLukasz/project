@@ -11,7 +11,7 @@ In this version i want to add powerful enemy(boss), shot upgrade, health points,
 
 You can move in left and right and the enemies go from left to right changing direction and moving down a bit.
 
-1.Controls 
+1. Controls 
 
 left - left arrow key
 
