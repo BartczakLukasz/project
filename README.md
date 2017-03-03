@@ -40,32 +40,25 @@ fifth week - create boss shots and add pause mechanics
 sixth week - create sprites and additional game mechanics (health,score)
 
 4. Used technologies
+  javax.swing.Jframe
+  javax.swing.JPanel
+  java.awt.Canvas
+  java.awt.Color
+  java.awt.Dimension
+  java.awt.Graphics2D
+  import java.awt.event.KeyAdapter
+  java.awt.event.KeyEvent
+  java.awt.event.WindowAdapter
+  java.awt.event.WindowEvent
+  java.awt.image.BufferStrategy
+  java.util.ArrayList
 
-javax.swing.Jframe
-
-javax.swing.JPanel
-
-java.awt.Canvas
-
-java.awt.Color
-
-java.awt.Dimension
-
-java.awt.Graphics2D
-
-import java.awt.event.KeyAdapter
-
-java.awt.event.KeyEvent
-
-java.awt.event.WindowAdapter
-
-java.awt.event.WindowEvent
-
-java.awt.image.BufferStrategy/n
-java.util.ArrayList
 
 Jest to gra typu shoot’em up oryginalnie stworzona przez Tomohiro Nishikado w 1978 roku na maszynę arcade’ową. Jest to jedna z pierwszych gier tego gatunku. Gra polega na wyeliminowaniu wszystkich wrogów znajdujących się u góry ekranu. 
+
 Przegrać można kiedy zostaniesz trafiony przez pocisk wroga, bądź gdy wrogowie przemieszczą się na dół ekranu. W oryginale celem gracza było zdobycie jak największej ilości punktów. 
+
 W mojej wersji zamierzam dodać potężnego przeciwnika (bossa), zmianę(ulepszenie) strzału po zdobyciu odpowiedniej ilości punktów, punkty zdrowia(tarczy), kilka plansz, wzmocnienie wrogów co kolejną planszę, stan krytyczny gracza, odnowa zdrowia po uzyskaniu odpowiedniej ilości punktów. 
+
 W grze można poruszać się w lewo i w prawo. Przeciwnicy po doleceniu do krawędzi ekranu zmieniają kierunek lotu i przybliżają się do dolnej granicy ekranu.
 
