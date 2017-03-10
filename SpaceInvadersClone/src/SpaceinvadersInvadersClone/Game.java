@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 public class Game extends Canvas {
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
@@ -32,7 +31,6 @@ public class Game extends Canvas {
 	private boolean rightPressed = false;
 	private boolean firePressed = false;
 	private boolean logicRequiredThisLoop = false;
-	
 	
 	public Game() {
 		JFrame container = new JFrame("Space Invaders 101");
@@ -65,7 +63,6 @@ public class Game extends Canvas {
 		
 		initEntities();
 	}
-	
 	
 	private void startGame() {
 		entities.clear();
@@ -114,6 +111,7 @@ public class Game extends Canvas {
 		if (alienCount == 0) {
 			notifyWin();
 		}
+		
 		for (int i=0;i<entities.size();i++) {
 			Entity entity = (Entity) entities.get(i);
 			
@@ -122,6 +120,7 @@ public class Game extends Canvas {
 			}
 		}
 	}
+	
 	public void tryToFire() {
 		if (System.currentTimeMillis() - lastFire < firingInterval) {
 			return;
@@ -261,6 +260,7 @@ public class Game extends Canvas {
 	
 	public static void main(String argv[]) {
 		Game g =new Game();
+
 		g.gameLoop();
 	}
 }
