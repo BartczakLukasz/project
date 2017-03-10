@@ -187,8 +187,6 @@ public class Game extends Canvas {
 				g.drawString("Press any key",(800-g.getFontMetrics().stringWidth("Press any key"))/2,300);
 			}
 			
-			// finally, we've completed drawing so clear up the graphics
-			// and flip the buffer over
 			g.dispose();
 			strategy.show();
 			
@@ -212,8 +210,6 @@ public class Game extends Canvas {
 		private int pressCount = 1;
 		
 		public void keyPressed(KeyEvent e) {
-			// if we're waiting for an "any key" typed then we don't 
-			// want to do anything with just a "press"
 			if (waitingForKeyPress) {
 				return;
 			}
@@ -257,7 +253,6 @@ public class Game extends Canvas {
 				}
 			}
 			
-			// if we hit escape, then quit the game
 			if (e.getKeyChar() == 27) {
 				System.exit(0);
 			}
