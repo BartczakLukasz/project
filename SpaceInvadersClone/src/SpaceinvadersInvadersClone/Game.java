@@ -31,6 +31,7 @@ public class Game extends Canvas {
 	private boolean rightPressed = false;
 	private boolean firePressed = false;
 	private boolean logicRequiredThisLoop = false;
+	public static int healthPoints = 100;
 	
 	public Game() {
 		JFrame container = new JFrame("Space Invaders 101");
