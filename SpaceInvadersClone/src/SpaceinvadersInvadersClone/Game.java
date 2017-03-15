@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,6 +33,14 @@ public class Game extends Canvas {
 	private boolean firePressed = false;
 	private boolean logicRequiredThisLoop = false;
 	public static int healthPoints = 100;
+	Random z = new Random();
+	Random q = new Random();
+	public int x1=400,x2=340,x3=333,x4=445,
+			x5=230,x6=403,x7=695,x8=150,x9=90,x10=30,
+			x11=367,x12=100,x13=456,x14=643,x15=444,x16=521,
+			x17,x18,x19,x20,y1=50,y2=543,y3=233,y4=123,y5=200,
+			y6=20,y7=123,y8=500,y9=340,y10=250,y11=653,y12=352,
+			y13=654,y14=743,y15=253,y16=533,y17=233,y18=373,y19=400,y20=700;
 	
 	public Game() {
 		JFrame container = new JFrame("Space Invaders 101");
@@ -131,6 +140,77 @@ public class Game extends Canvas {
 		ShotEntity shot = new ShotEntity(this,"sprites/shot.gif",ship.getX()+10,ship.getY()-30);
 		entities.add(shot);
 	}
+	private void chooseStars(){ 
+		if(System.currentTimeMillis()%275 <= 5)
+		{
+			 x1 = z.nextInt(800);
+			 x2 = z.nextInt(800);
+			 x3 = z.nextInt(800);
+			 x4 = z.nextInt(800);
+			 x5 = z.nextInt(800);
+			 x6 = z.nextInt(800);
+			 x7 = z.nextInt(800);
+			 x8 = z.nextInt(800);
+			 x9 = z.nextInt(800);
+			 x10 = z.nextInt(800);
+			 x11 = z.nextInt(800);
+			 x12 = z.nextInt(800);
+			 x13 = z.nextInt(800);
+			 x14 = z.nextInt(800);
+			 x15 = z.nextInt(800);
+			 x16 = z.nextInt(800);
+			 x17 = z.nextInt(800);
+			 x18 = z.nextInt(800);
+			 x19 = z.nextInt(800);
+			 x20 = z.nextInt(800);
+			 y11 = q.nextInt(600);
+			 y12 = q.nextInt(600);
+			 y13 = q.nextInt(600);
+			 y14 = q.nextInt(600);
+			 y15 = q.nextInt(600);
+			 y16 = q.nextInt(600);
+			 y17 = q.nextInt(600);
+			 y18 = q.nextInt(600);
+			 y19 = q.nextInt(600);
+			 y20 = q.nextInt(600);
+			 y1 = q.nextInt(600);
+			 y2 = q.nextInt(600);
+			 y3 = q.nextInt(600);
+			 y4 = q.nextInt(600);
+			 y5 = q.nextInt(600);
+			 y6 = q.nextInt(600);
+			 y7 = q.nextInt(600);
+			 y8 = q.nextInt(600);
+			 y9 = q.nextInt(600);
+			 y10 = q.nextInt(600);
+		}
+	}
+	
+	void starMovement(){
+		if (System.currentTimeMillis()%1 == 0)
+		{
+			y1+=1;
+			y2+=1;
+			y3+=1;
+			y4+=1;
+			y5+=1;
+			y6+=1;
+			y7+=1;
+			y8+=1;
+			y9+=1;
+			y10+=1;
+			y11+=1;
+			y12+=1;
+			y13+=1;
+			y14+=1;
+			y15+=1;
+			y16+=1;
+			y17+=1;
+			y18+=1;
+			y19+=1;
+			y20+=1;
+		}
+	}
 	
 	public void gameLoop() {
 		long lastLoopTime = System.currentTimeMillis();
@@ -138,10 +218,52 @@ public class Game extends Canvas {
 		while (gameRunning) {
 			long delta = System.currentTimeMillis() - lastLoopTime;
 			lastLoopTime = System.currentTimeMillis();
+			chooseStars();
 			
 			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			g.setColor(Color.black);
 			g.fillRect(0,0,800,600);
+			g.setColor(Color.red);
+			g.fillRect(x1,y1,1,1);
+			g.setColor(Color.blue);
+			g.fillRect(x2,y2,1,1);
+			g.setColor(Color.green);
+			g.fillRect(x3,y3,1,1);
+			g.setColor(Color.white);
+			g.fillRect(x4,y4,1,1);
+			g.setColor(Color.cyan);
+			g.fillRect(x5,y5,1,1);
+			g.setColor(Color.red);
+			g.fillRect(x6,y6,1,1);
+			g.setColor(Color.blue);
+			g.fillRect(x7,y7,1,1);
+			g.setColor(Color.green);
+			g.fillRect(x8,y8,1,1);
+			g.setColor(Color.yellow);
+			g.fillRect(x9,y9,1,1);
+			g.setColor(Color.cyan);
+			g.fillRect(x10,y10,1,1);
+			g.setColor(Color.red);
+			g.fillRect(x11,y11,1,1);
+			g.setColor(Color.blue);
+			g.fillRect(x12,y12,1,1);
+			g.setColor(Color.green);
+			g.fillRect(x13,y13,1,1);
+			g.setColor(Color.orange);
+			g.fillRect(x14,y14,1,1);
+			g.setColor(Color.cyan);
+			g.fillRect(x15,y15,1,1);
+			g.setColor(Color.red);
+			g.fillRect(x16,y16,1,1);
+			g.setColor(Color.magenta);
+			g.fillRect(x17,y17,1,1);
+			g.setColor(Color.green);
+			g.fillRect(x18,y18,1,1);
+			g.setColor(Color.pink);
+			g.fillRect(x19,y19,1,1);
+			g.setColor(Color.magenta);
+			g.fillRect(x20,y20,1,1);
+			starMovement();
 			
 			if (!waitingForKeyPress) {
 				for (int i=0;i<entities.size();i++) {
