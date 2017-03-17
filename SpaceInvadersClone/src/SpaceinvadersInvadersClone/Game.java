@@ -3,6 +3,7 @@ package SpaceinvadersInvadersClone;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+
 public class Game extends Canvas {
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
@@ -24,8 +27,11 @@ public class Game extends Canvas {
 	private double moveSpeed = 300;
 	private long lastFire = 0;
 	private long firingInterval = 500;
+	private long lastBomb = System.currentTimeMillis()+1500;
+	private long bombingInterval = 500;
 	private int alienCount;
-	
+	public boolean bombFired = false;
+	public boolean shotFired = false;
 	private String message = "";
 	private boolean waitingForKeyPress = true;
 	private boolean leftPressed = false;
@@ -33,6 +39,8 @@ public class Game extends Canvas {
 	private boolean firePressed = false;
 	private boolean logicRequiredThisLoop = false;
 	public static int healthPoints = 100;
+	public int chooseAlien = 1;
+	Random r = new Random();
 	Random z = new Random();
 	Random q = new Random();
 	public int x1=400,x2=340,x3=333,x4=445,
@@ -41,15 +49,14 @@ public class Game extends Canvas {
 			x17,x18,x19,x20,y1=50,y2=543,y3=233,y4=123,y5=200,
 			y6=20,y7=123,y8=500,y9=340,y10=250,y11=653,y12=352,
 			y13=654,y14=743,y15=253,y16=533,y17=233,y18=373,y19=400,y20=700;
-	
 	public Game() {
-		JFrame container = new JFrame("Space Invaders 101");
+		JFrame container = new JFrame("Space Invaders Clone");
 		
 		JPanel panel = (JPanel) container.getContentPane();
-		panel.setPreferredSize(new Dimension(800,600));
+		panel.setPreferredSize(new Dimension(800,650));
 		panel.setLayout(null);
 		
-		setBounds(0,0,800,600);
+		setBounds(0,0,800,650);
 		panel.add(this);
 		
 		setIgnoreRepaint(true);
@@ -140,6 +147,23 @@ public class Game extends Canvas {
 		ShotEntity shot = new ShotEntity(this,"sprites/shot.gif",ship.getX()+10,ship.getY()-30);
 		entities.add(shot);
 	}
+	public void tryBombing(){
+		if (System.currentTimeMillis() - lastBomb <bombingInterval || alienCount == 0){
+			return;
+			
+		}
+		bombingInterval = (long)z.nextInt(300)+500;
+		lastBomb = System.currentTimeMillis();
+		Entity alien = (Entity) entities.get(chooseAlien);
+		BombEntity bomb = new BombEntity(this,"sprites/bomb.gif",alien.getX()+10,alien.getY()+25);
+		bombFired = true;
+		entities.add(bomb);	
+	}
+public void choseAlien(){
+		
+		if (alienCount>0)
+		chooseAlien = r.nextInt(alienCount)+1;
+	}
 	private void chooseStars(){ 
 		if(System.currentTimeMillis()%275 <= 5)
 		{
@@ -219,10 +243,11 @@ public class Game extends Canvas {
 			long delta = System.currentTimeMillis() - lastLoopTime;
 			lastLoopTime = System.currentTimeMillis();
 			chooseStars();
+			choseAlien();
 			
 			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			g.setColor(Color.black);
-			g.fillRect(0,0,800,600);
+			g.fillRect(0,0,800,650);
 			g.setColor(Color.red);
 			g.fillRect(x1,y1,1,1);
 			g.setColor(Color.blue);
@@ -263,8 +288,7 @@ public class Game extends Canvas {
 			g.fillRect(x19,y19,1,1);
 			g.setColor(Color.magenta);
 			g.fillRect(x20,y20,1,1);
-			starMovement();
-			
+			starMovement();		
 			if (!waitingForKeyPress) {
 				for (int i=0;i<entities.size();i++) {
 					Entity entity = (Entity) entities.get(i);
@@ -323,6 +347,9 @@ public class Game extends Canvas {
 			if (firePressed) {
 				tryToFire();
 			}
+			if (!waitingForKeyPress){
+				tryBombing();
+			}
 			
 			try { Thread.sleep(10); } catch (Exception e) {}
 		}
@@ -363,6 +390,7 @@ public class Game extends Canvas {
 				firePressed = false;
 			}
 		}
+		
 
 		public void keyTyped(KeyEvent e) {
 			if (waitingForKeyPress) {
