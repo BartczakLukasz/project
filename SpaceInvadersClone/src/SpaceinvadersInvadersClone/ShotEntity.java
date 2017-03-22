@@ -1,6 +1,7 @@
 package SpaceinvadersInvadersClone;
 
 
+
 public class ShotEntity extends Entity {
 	private double moveSpeed = -300;
 	private Game game;
@@ -34,6 +35,17 @@ public class ShotEntity extends Entity {
 			
 			game.notifyAlienKilled();
 			used = true;
+		}
+		if (other instanceof BossEntity){
+			if (game.bossHealth <= 0){
+				game.removeEntity(this);
+				game.removeEntity(other);
+				game.alive = false;
+				game.notifyBossKilled();
+			} else {
+				game.removeEntity(this);
+				game.bossHealth-=2;
+			}
 		}
 	}
 }

@@ -1,0 +1,31 @@
+package SpaceinvadersInvadersClone;
+
+public class BossEntity extends Entity{
+	private double moveSpeed = 120;
+	private Game game;
+
+	public BossEntity(Game game,String ref,int x,int y) {
+		super(ref,x,y);
+			
+		this.game = game;
+		dx = -moveSpeed;
+	}
+
+	public void move(long delta) {
+		
+		if ((dx < 0) && (x < 300)) {
+			game.updateLogic();
+		}
+		if ((dx > 0) && (x > 400)) {
+			game.updateLogic();
+		}
+		
+		super.move(delta);
+	}
+	public void doLogic() {
+		dx = -dx;
+	}
+
+	public void collidedWith(Entity other) {
+	}
+}

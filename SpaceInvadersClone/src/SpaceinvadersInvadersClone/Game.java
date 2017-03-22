@@ -18,12 +18,14 @@ import javax.swing.JPanel;
 
 
 
+
 public class Game extends Canvas {
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
 	private ArrayList entities = new ArrayList();
 	private ArrayList removeList = new ArrayList();
 	private Entity ship;
+	private Entity boss;
 	private double moveSpeed = 300;
 	private long lastFire = 0;
 	private long firingInterval = 500;
@@ -49,6 +51,9 @@ public class Game extends Canvas {
 			x17,x18,x19,x20,y1=50,y2=543,y3=233,y4=123,y5=200,
 			y6=20,y7=123,y8=500,y9=340,y10=250,y11=653,y12=352,
 			y13=654,y14=743,y15=253,y16=533,y17=233,y18=373,y19=400,y20=700;
+	static int bossHealth = 100;
+	public boolean bossCame = false;
+	public boolean alive = false;
 	public Game() {
 		JFrame container = new JFrame("Space Invaders Clone");
 		
@@ -102,6 +107,7 @@ public class Game extends Canvas {
 				alienCount++;
 			}
 		}
+		boss = new BossEntity(this,"sprites/boss.GIF",300,200);
 	}
 	
 	public void updateLogic() {
@@ -114,6 +120,8 @@ public class Game extends Canvas {
 	
 	public void notifyDeath() {
 		message = "Oh no! They got you, try again?";
+		bossCame = false;
+		bossHealth = 100;
 		waitingForKeyPress = true;
 	}
 	
@@ -121,12 +129,17 @@ public class Game extends Canvas {
 		message = "Well done! You Win!";
 		waitingForKeyPress = true;
 	}
+	public void bringBoss(){
+		entities.add(boss);
+		alive = true;
+		bossCame = true;
+	}
 	
 	public void notifyAlienKilled() {
 		alienCount--;
 		
 		if (alienCount == 0) {
-			notifyWin();
+			bringBoss();
 		}
 		
 		for (int i=0;i<entities.size();i++) {
@@ -136,6 +149,10 @@ public class Game extends Canvas {
 				entity.setHorizontalMovement(entity.getHorizontalMovement() * 1.02);
 			}
 		}
+	}
+	public void notifyBossKilled(){
+		bossCame = false;
+		notifyWin();
 	}
 	
 	public void tryToFire() {
