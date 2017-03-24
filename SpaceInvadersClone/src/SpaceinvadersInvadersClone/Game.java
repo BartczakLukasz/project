@@ -54,6 +54,8 @@ public class Game extends Canvas {
 	static int bossHealth = 100;
 	public boolean bossCame = false;
 	public boolean alive = false;
+	private Sound bgm = new Sound("/sounds/bgm.wav");
+	public boolean enableBgm = false;
 	public Game() {
 		JFrame container = new JFrame("Space Invaders Clone");
 		
@@ -119,6 +121,7 @@ public class Game extends Canvas {
 	}
 	
 	public void notifyDeath() {
+		bgm.stop();
 		message = "Oh no! They got you, try again?";
 		bossCame = false;
 		bossHealth = 100;
@@ -126,7 +129,10 @@ public class Game extends Canvas {
 	}
 	
 	public void notifyWin() {
+		bgm.stop();
 		message = "Well done! You Win!";
+		bossCame = false;
+		bossHealth = 100;
 		waitingForKeyPress = true;
 	}
 	public void bringBoss(){
@@ -345,6 +351,7 @@ public void choseAlien(){
 			}
 			
 			if (waitingForKeyPress) {
+				enableBgm = false;
 				g.setColor(Color.white);
 				g.drawString(message,(800-g.getFontMetrics().stringWidth(message))/2,250);
 				g.drawString("Press any key",(800-g.getFontMetrics().stringWidth("Press any key"))/2,300);
@@ -359,6 +366,12 @@ public void choseAlien(){
 				ship.setHorizontalMovement(-moveSpeed);
 			} else if ((rightPressed) && (!leftPressed)) {
 				ship.setHorizontalMovement(moveSpeed);
+			}
+			if (gameRunning && !waitingForKeyPress &&!enableBgm){
+				enableBgm = true;
+				if (enableBgm){
+					bgm.loop();
+				}
 			}
 			
 			if (firePressed) {
@@ -415,6 +428,7 @@ public void choseAlien(){
 					waitingForKeyPress = false;
 					startGame();
 					pressCount = 0;
+					
 				} else {
 					pressCount++;
 				}
