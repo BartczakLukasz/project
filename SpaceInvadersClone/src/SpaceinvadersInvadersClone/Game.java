@@ -22,13 +22,15 @@ import javax.swing.JPanel;
 public class Game extends Canvas {
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
+	private boolean gamePaused = false;
 	private ArrayList entities = new ArrayList();
 	private ArrayList removeList = new ArrayList();
 	private Entity ship;
 	private Entity boss;
+	private Entity bossBody;
 	private double moveSpeed = 300;
 	private long lastFire = 0;
-	private long firingInterval = 500;
+	private long firingInterval = 100;
 	private long lastBomb = System.currentTimeMillis()+1500;
 	private long bombingInterval = 500;
 	private int alienCount;
@@ -39,6 +41,7 @@ public class Game extends Canvas {
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
 	private boolean firePressed = false;
+	private boolean pausePressed = false;
 	private boolean logicRequiredThisLoop = false;
 	public static int healthPoints = 100;
 	public int chooseAlien = 1;
@@ -95,6 +98,7 @@ public class Game extends Canvas {
 		leftPressed = false;
 		rightPressed = false;
 		firePressed = false;
+		pausePressed = false;
 	}
 	
 	private void initEntities() {
@@ -109,6 +113,7 @@ public class Game extends Canvas {
 				alienCount++;
 			}
 		}
+		bossBody = new BossBody(this,"sprites/bossbody.gif",200,150);
 		boss = new BossEntity(this,"sprites/boss.GIF",300,200);
 	}
 	
@@ -136,6 +141,7 @@ public class Game extends Canvas {
 		waitingForKeyPress = true;
 	}
 	public void bringBoss(){
+		entities.add(bossBody);
 		entities.add(boss);
 		alive = true;
 		bossCame = true;
@@ -312,7 +318,7 @@ public void choseAlien(){
 			g.setColor(Color.magenta);
 			g.fillRect(x20,y20,1,1);
 			starMovement();		
-			if (!waitingForKeyPress) {
+			if (!waitingForKeyPress&&!gamePaused) {
 				for (int i=0;i<entities.size();i++) {
 					Entity entity = (Entity) entities.get(i);
 					
@@ -356,6 +362,12 @@ public void choseAlien(){
 				g.drawString(message,(800-g.getFontMetrics().stringWidth(message))/2,250);
 				g.drawString("Press any key",(800-g.getFontMetrics().stringWidth("Press any key"))/2,300);
 			}
+			if (gamePaused){
+				enableBgm = false;
+				g.setColor(Color.white);
+				g.drawString(message,(800-g.getFontMetrics().stringWidth(message))/2,250);
+				g.drawString("Press any key to continue",(800-g.getFontMetrics().stringWidth("Press any key to continue"))/2,300);
+			}
 			
 			g.dispose();
 			strategy.show();
@@ -367,7 +379,7 @@ public void choseAlien(){
 			} else if ((rightPressed) && (!leftPressed)) {
 				ship.setHorizontalMovement(moveSpeed);
 			}
-			if (gameRunning && !waitingForKeyPress &&!enableBgm){
+			if (gameRunning && !waitingForKeyPress &&!enableBgm && !gamePaused){
 				enableBgm = true;
 				if (enableBgm){
 					bgm.loop();
@@ -377,7 +389,15 @@ public void choseAlien(){
 			if (firePressed) {
 				tryToFire();
 			}
-			if (!waitingForKeyPress){
+			if (pausePressed){
+				bgm.stop();
+				gamePaused = true;
+				rightPressed = false;
+				leftPressed = false;
+				firePressed = false;
+				pausePressed = false;
+			}
+			if (!waitingForKeyPress && !gamePaused){
 				tryBombing();
 			}
 			
@@ -392,7 +412,9 @@ public void choseAlien(){
 			if (waitingForKeyPress) {
 				return;
 			}
-			
+			if (gamePaused){
+				return;
+			}
 			
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				leftPressed = true;
@@ -403,13 +425,18 @@ public void choseAlien(){
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				firePressed = true;
 			}
+			if (e.getKeyCode() == KeyEvent.VK_ENTER){
+				pausePressed = true;
+			}
 		} 
 		
 		public void keyReleased(KeyEvent e) {
 			if (waitingForKeyPress) {
 				return;
 			}
-			
+			if (gamePaused){
+				return;
+			}
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				leftPressed = false;
 			}
@@ -418,6 +445,9 @@ public void choseAlien(){
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				firePressed = false;
+			}
+			if (e.getKeyCode() == KeyEvent.VK_ENTER){
+				pausePressed = false;
 			}
 		}
 		
@@ -432,6 +462,15 @@ public void choseAlien(){
 				} else {
 					pressCount++;
 				}
+			}
+			if (gamePaused){
+				if (pressCount == 1){
+					gamePaused = false;
+					pressCount = 0;
+				} else  {
+					pressCount++;
+				}
+				enableBgm = false;
 			}
 			
 			if (e.getKeyChar() == 27) {
