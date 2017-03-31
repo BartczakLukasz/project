@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 
 
+
 public class Game extends Canvas {
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
@@ -32,6 +33,7 @@ public class Game extends Canvas {
 	private long lastFire = 0;
 	private long firingInterval = 100;
 	private long lastBomb = System.currentTimeMillis()+1500;
+	private long lastAttack = System.currentTimeMillis();
 	private long bombingInterval = 500;
 	private int alienCount;
 	public boolean bombFired = false;
@@ -99,6 +101,7 @@ public class Game extends Canvas {
 		rightPressed = false;
 		firePressed = false;
 		pausePressed = false;
+		healthPoints = 100;
 	}
 	
 	private void initEntities() {
@@ -139,6 +142,7 @@ public class Game extends Canvas {
 		bossCame = false;
 		bossHealth = 100;
 		waitingForKeyPress = true;
+		healthPoints = 100;
 	}
 	public void bringBoss(){
 		entities.add(bossBody);
@@ -187,6 +191,16 @@ public class Game extends Canvas {
 		BombEntity bomb = new BombEntity(this,"sprites/bomb.gif",alien.getX()+10,alien.getY()+25);
 		bombFired = true;
 		entities.add(bomb);	
+	}
+	public void bossAttack(){
+		if (System.currentTimeMillis() - lastAttack <bombingInterval +1000 || !bossCame){
+			return;
+			
+		}
+		bombingInterval = (long)z.nextInt(1000)+500;
+		lastAttack = System.currentTimeMillis();
+		BossBomb bbomb = new BossBomb(this,"sprites/sbomb.gif",boss.getX()+40,boss.getY()+80);
+		entities.add(bbomb);
 	}
 public void choseAlien(){
 		
@@ -397,10 +411,12 @@ public void choseAlien(){
 				firePressed = false;
 				pausePressed = false;
 			}
-			if (!waitingForKeyPress && !gamePaused){
+			if (!waitingForKeyPress && !gamePaused && !bossCame){
 				tryBombing();
 			}
-			
+			if (!waitingForKeyPress && !gamePaused && bossCame){
+				bossAttack();
+			}
 			try { Thread.sleep(10); } catch (Exception e) {}
 		}
 	}

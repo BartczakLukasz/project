@@ -24,10 +24,14 @@ public class BossBomb extends Entity {
 	public void collidedWith(Entity other) {
 		if (other instanceof ShipEntity) {
 			game.removeEntity(this);
-			game.healthPoints -=25;
+			if (game.healthPoints<=50){
+					game.healthPoints -=40;
+			}else{
+				game.healthPoints-=25;
+			}
 			if (game.healthPoints <= 0){
-				game.healthPoints = 0;
-				game.notifyDeath();
+					game.healthPoints = 0;
+					game.notifyDeath();
 				}
 		}
 	}
