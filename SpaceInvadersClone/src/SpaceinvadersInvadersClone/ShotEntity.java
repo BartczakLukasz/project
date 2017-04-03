@@ -32,7 +32,7 @@ public class ShotEntity extends Entity {
 		if (other instanceof AlienEntity) {
 			game.removeEntity(this);
 			game.removeEntity(other);
-			
+			game.score+=250;
 			game.notifyAlienKilled();
 			used = true;
 		}
@@ -42,6 +42,7 @@ public class ShotEntity extends Entity {
 				game.removeEntity(other);
 				game.alive = false;
 				game.notifyBossKilled();
+				game.score+=10000;
 			} else {
 				game.removeEntity(this);
 				game.bossHealth-=2;

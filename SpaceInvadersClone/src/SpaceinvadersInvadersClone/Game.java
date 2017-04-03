@@ -46,6 +46,7 @@ public class Game extends Canvas {
 	private boolean pausePressed = false;
 	private boolean logicRequiredThisLoop = false;
 	public static int healthPoints = 100;
+	public int score = 0;
 	public int chooseAlien = 1;
 	Random r = new Random();
 	Random z = new Random();
@@ -57,6 +58,8 @@ public class Game extends Canvas {
 			y6=20,y7=123,y8=500,y9=340,y10=250,y11=653,y12=352,
 			y13=654,y14=743,y15=253,y16=533,y17=233,y18=373,y19=400,y20=700;
 	static int bossHealth = 100;
+	public int round = 1;
+	public int hiScore = 100000;
 	public boolean bossCame = false;
 	public boolean alive = false;
 	private Sound bgm = new Sound("/sounds/bgm.wav");
@@ -134,6 +137,9 @@ public class Game extends Canvas {
 		bossCame = false;
 		bossHealth = 100;
 		waitingForKeyPress = true;
+		healthPoints = 100;
+		round = 1;
+		score = 0;
 	}
 	
 	public void notifyWin() {
@@ -143,6 +149,7 @@ public class Game extends Canvas {
 		bossHealth = 100;
 		waitingForKeyPress = true;
 		healthPoints = 100;
+		round+=1;
 	}
 	public void bringBoss(){
 		entities.add(bossBody);
@@ -331,7 +338,17 @@ public void choseAlien(){
 			g.fillRect(x19,y19,1,1);
 			g.setColor(Color.magenta);
 			g.fillRect(x20,y20,1,1);
-			starMovement();		
+			starMovement();	
+			g.setColor(Color.white);
+			g.setFont(new Font("TimesRoman",Font.PLAIN,24));
+			g.drawString("Health: ",0,600);
+			g.drawString(""+healthPoints,0+g.getFontMetrics().stringWidth("Health: "),600);
+			g.drawString("Score: ",650,600);
+			g.drawString(""+score,650+g.getFontMetrics().stringWidth("Score: "),600);
+			g.drawString("Round: ",200,600);
+			g.drawString(""+round,200+g.getFontMetrics().stringWidth("Round: "),600);
+			g.drawString("Hi Score: ",400,600);
+			g.drawString(""+hiScore,400+g.getFontMetrics().stringWidth("Hi Score: "),600);
 			if (!waitingForKeyPress&&!gamePaused) {
 				for (int i=0;i<entities.size();i++) {
 					Entity entity = (Entity) entities.get(i);
@@ -339,7 +356,9 @@ public void choseAlien(){
 					entity.move(delta);
 				}
 			}
-			
+			if (score > hiScore){
+				hiScore = score;
+			}
 			for (int i=0;i<entities.size();i++) {
 				Entity entity = (Entity) entities.get(i);
 				
