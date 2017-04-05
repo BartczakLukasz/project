@@ -31,7 +31,7 @@ public class Game extends Canvas {
 	private Entity bossBody;
 	private double moveSpeed = 300;
 	private long lastFire = 0;
-	private long firingInterval = 100;
+	private long firingInterval = 600;
 	private long lastBomb = System.currentTimeMillis()+1500;
 	private long lastAttack = System.currentTimeMillis();
 	private long bombingInterval = 500;
@@ -62,6 +62,7 @@ public class Game extends Canvas {
 	public int hiScore = 100000;
 	public boolean bossCame = false;
 	public boolean alive = false;
+	public boolean isSuperShot = false;
 	private Sound bgm = new Sound("/sounds/bgm.wav");
 	public boolean enableBgm = false;
 	public Game() {
@@ -140,6 +141,7 @@ public class Game extends Canvas {
 		healthPoints = 100;
 		round = 1;
 		score = 0;
+		isSuperShot = false;
 	}
 	
 	public void notifyWin() {
@@ -186,6 +188,17 @@ public class Game extends Canvas {
 		lastFire = System.currentTimeMillis();
 		ShotEntity shot = new ShotEntity(this,"sprites/shot.gif",ship.getX()+10,ship.getY()-30);
 		entities.add(shot);
+	}
+	public void trySuperShot() {
+		if (System.currentTimeMillis() - lastFire < firingInterval+100) {
+			return;
+		}
+		
+		lastFire = System.currentTimeMillis();
+		ShotEntity shot1 = new ShotEntity(this,"sprites/shot.gif",ship.getX()-10,ship.getY()-30);
+		ShotEntity shot2 = new ShotEntity(this,"sprites/shot.gif",ship.getX()+35,ship.getY()-30);
+		entities.add(shot1);
+		entities.add(shot2);
 	}
 	public void tryBombing(){
 		if (System.currentTimeMillis() - lastBomb <bombingInterval || alienCount == 0){
@@ -419,8 +432,14 @@ public void choseAlien(){
 				}
 			}
 			
-			if (firePressed) {
+			if (firePressed && !isSuperShot) {
 				tryToFire();
+			}
+			if (firePressed && isSuperShot)  {
+				trySuperShot();
+			}
+			if (score >= 10000){
+				isSuperShot = true;
 			}
 			if (pausePressed){
 				bgm.stop();
